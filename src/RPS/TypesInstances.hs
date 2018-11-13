@@ -58,7 +58,7 @@ instance Serializable AD.Patch where
 
 
 instance SimulationState Game where
-  initial = Game Nothing Nothing Draw 0
+  initial = Game Nothing Nothing Draw 0 0 0
   ready g =
     isJust (_gamePlayer1 g) && isJust (_gamePlayer2 g)
 
@@ -69,7 +69,14 @@ sim :: Game -> Game
 sim g = flip execState g $ do
   p1d <- use gamePlayer1
   p2d <- use gamePlayer2
-  gameOutcome .= decideOutcome (fromJust p1d) (fromJust p2d)
+  let o = decideOutcome (fromJust p1d) (fromJust p2d)
+  gameOutcome .= o
+
+  case o of
+    WinPlayer1 -> gamePlayer1Wins += 1
+    WinPlayer2 -> gamePlayer2Wins += 1
+    _          -> return ()
+
   gamePlayer1 .= Nothing
   gamePlayer2 .= Nothing
   gameRound += 1

@@ -12,10 +12,12 @@ data Outcome = Draw | WinPlayer1 | WinPlayer2
   deriving (Show, Eq)
 
 data Game = Game
-  { _gamePlayer1 :: Maybe Decision
-  , _gamePlayer2 :: Maybe Decision
-  , _gameOutcome :: Outcome
-  , _gameRound   :: Int
+  { _gamePlayer1     :: Maybe Decision
+  , _gamePlayer2     :: Maybe Decision
+  , _gameOutcome     :: Outcome
+  , _gameRound       :: Int
+  , _gamePlayer1Wins :: Int
+  , _gamePlayer2Wins :: Int
   }
   deriving (Show, Eq)
 makeLenses ''Game
