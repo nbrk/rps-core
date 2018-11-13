@@ -35,7 +35,7 @@ resolver: lts-12.6
 #  - wai
 packages:
 - .
-- /home/nbrk/projects/wego
+- ../wego
 
 
 # Dependency packages to be pulled from upstream that are not in the resolver
